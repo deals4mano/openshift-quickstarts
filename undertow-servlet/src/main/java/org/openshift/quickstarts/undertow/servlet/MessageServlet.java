@@ -48,7 +48,7 @@ public class MessageServlet extends HttpServlet {
         PrintWriter writer = resp.getWriter();        
         //Properties properties = System.getProperties();        
         int count =0;
-        properties.forEach(Properties properties : System.getProperties()) {
+        for(Properties properties : System.getProperties()) {
             count++;
             writer.println("#"+ count + ". " +k + ":" + v );
         }
