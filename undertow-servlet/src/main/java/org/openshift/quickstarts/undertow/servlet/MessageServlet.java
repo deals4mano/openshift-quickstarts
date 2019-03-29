@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Properties;
+import java.util.Enumeration;
 
 /**
  * @author Stuart Douglas
@@ -47,10 +48,14 @@ public class MessageServlet extends HttpServlet {
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter writer = resp.getWriter();        
         //Properties properties = System.getProperties();        
-        int count =0;
-        for(Properties properties : System.getProperties()) {
+        int count =0;        
+        Properties p = System.getProperties();
+        Enumeration keys = p.keys();
+        while (keys.hasMoreElements()) {
+            String key = (String)keys.nextElement();
+            String value = (String)p.get(key);
             count++;
-            writer.println("#"+ count + ". " +k + ":" + v );
+            writer.println("#"+ count + ". " +key + ":" + value );
         }
         writer.write("-------------env Environment : " + System.getenv("Environment"));
         writer.close();
