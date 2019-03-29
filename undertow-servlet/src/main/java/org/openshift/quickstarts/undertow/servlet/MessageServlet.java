@@ -46,9 +46,13 @@ public class MessageServlet extends HttpServlet {
     @Override
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter writer = resp.getWriter();        
-        Properties properties = System.getProperties();        
-        properties.forEach((k, v) -> writer.println(k + ":" + v + "<br/>"));
-        writer.write("------------- Environment : " + System.getenv("Environment"));
+        //Properties properties = System.getProperties();        
+        int count =0;
+        properties.forEach(Properties properties : System.getProperties()) {
+            count++;
+            writer.println("#"+ count + ". " +k + ":" + v );
+        }
+        writer.write("-------------env Environment : " + System.getenv("Environment"));
         writer.close();
     }
 
