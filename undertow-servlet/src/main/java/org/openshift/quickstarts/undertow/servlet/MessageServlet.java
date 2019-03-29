@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Properties;
 import java.util.Enumeration;
+import java.util.Map;
 
 /**
  * @author Stuart Douglas
@@ -49,6 +50,7 @@ public class MessageServlet extends HttpServlet {
         PrintWriter writer = resp.getWriter();        
         //Properties properties = System.getProperties();        
         int count =0;        
+        writer.write("--------------- VM Properties ------------------" );
         Properties p = System.getProperties();
         Enumeration keys = p.keys();
         while (keys.hasMoreElements()) {
@@ -57,7 +59,13 @@ public class MessageServlet extends HttpServlet {
             count++;
             writer.println("#"+ count + ". " +key + ":" + value );
         }
-        writer.write("-------------env Environment : " + System.getenv("Environment"));
+        writer.println("------------- Environment Variables ----------------" );
+        Map<String, String> env = System.getenv();
+        count = 0;
+        for (String envName : env.keySet()) {
+            count++;
+            writer.println("#"+ count + ". " + envName + ":" + env.get(envName) );            
+        }
         writer.close();
     }
 
