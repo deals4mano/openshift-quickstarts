@@ -45,7 +45,9 @@ public class MessageServlet extends HttpServlet {
     @Override
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter writer = resp.getWriter();        
-        writer.write(System.getProperty("Environment"));
+        Properties properties = System.getProperties();        
+        properties.forEach((k, v) -> writer.write(k + ":" + v));
+        //writer.write(System.getProperty("Environment"));
         writer.close();
     }
 
